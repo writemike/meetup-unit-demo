@@ -12,7 +12,7 @@ sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"pass":"applicati
 sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/
 curl localhost:8081
 
-sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d @full-applications.json http://localhost/config/applications
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d @./config/full-applications.json http://localhost/config/applications
 sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/config/applications
 sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/
 
@@ -20,7 +20,7 @@ sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"app_routes":[{"m
 sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"pass": "routes/app_routes"}' http://localhost/config/listeners/*:8088
 curl localhost:8088/php
 
-sudo curl -X PUT --unix-socket /var/run/control.unit.sock -d @full-routes.json http://localhost/config/routes/app_routes
+sudo curl -X PUT --unix-socket /var/run/control.unit.sock -d @./config/full-routes.json http://localhost/config/routes/app_routes
 curl localhost:8089/python/
 curl localhost:8089/perl/
 curl localhost:8089/ruby/
