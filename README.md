@@ -15,4 +15,4 @@ While trying out NGINX Unit, please consider how NGINX Plus can not only load ba
 Once your NGINX Unit instance has been built, add these configurations by using:  
 ```sudo curl --unix-socket /var/run/control.unit.sock -X PUT --data-binary @./certs/certkey.pem http://localhost/certificates/demo-bundle```  
 
-```sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d @full-config.json http://localhost/config```  
+```sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d @/config/full-config.json http://localhost/config```  
