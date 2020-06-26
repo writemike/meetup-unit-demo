@@ -1,0 +1,250 @@
+{
+	"certificates": {
+		"demo-bundle": {
+			"key": "RSA (2048 bits)",
+			"chain": [
+				{
+					"subject": {
+						"common_name": "unit.example.com",
+						"country": "AU",
+						"state_or_province": "NSW",
+						"locality": "Sydney",
+						"organization": "NGINX",
+						"department": "Unit"
+					},
+
+					"issuer": {
+						"common_name": "unit.example.com",
+						"country": "AU",
+						"state_or_province": "NSW",
+						"locality": "Sydney",
+						"organization": "NGINX",
+						"department": "Unit"
+					},
+
+					"validity": {
+						"since": "Jun 23 10:21:34 2020 GMT",
+						"until": "Jun 23 10:21:34 2021 GMT"
+					}
+				}
+			]
+		}
+	},
+	"config": {
+		"listeners": {
+			"*:8081": {
+				"pass": "applications/myphp"
+			},
+
+			"*:8082": {
+				"pass": "applications/mypython"
+			},
+
+			"*:8083": {
+				"pass": "applications/myperl"
+			},
+
+			"*:8084": {
+				"pass": "applications/myruby"
+			},
+
+			"*:8085": {
+				"pass": "applications/mygo"
+			},
+
+			"*:8086": {
+				"pass": "applications/mynodejs"
+			},
+
+			"*:8087": {
+				"pass": "applications/myasm"
+			},
+
+			"*:8088": {
+				"pass": "applications/myjava"
+			},
+			"*:8089": {
+				"pass": "routes/app_routes"
+			},
+			"*:8090": {
+                                "pass": "routes/app_routes",
+                                "tls": {
+                                        "certificate": "demo-bundle"
+                                }
+                        }
+		},
+
+		"applications": {
+			"myphp": {
+				"type": "php",
+				"processes": {
+					"max": 10,
+					"spare": 2
+				},
+
+				"root": "/home/mholland/demo/php",
+				"user": "mholland",
+				"group": "mholland",
+				"script": "index.php",
+				"limits": {
+					"timeout": 10,
+					"requests": 100
+				}
+			},
+
+			"mypython": {
+				"type": "python",
+				"processes": {
+					"max": 10,
+					"spare": 2
+				},
+
+				"path": "/home/mholland/demo/python",
+				"user": "mholland",
+				"group": "mholland",
+				"module": "wsgi",
+				"limits": {
+					"timeout": 10,
+					"requests": 100
+				}
+			},
+
+			"myperl": {
+				"type": "perl",
+				"processes": {
+					"max": 10,
+					"spare": 2
+				},
+
+				"working_directory": "/home/mholland/demo/perl",
+				"user": "mholland",
+				"group": "mholland",
+				"script": "/home/mholland/demo/perl/app.pl",
+				"limits": {
+					"timeout": 10,
+					"requests": 100
+				}
+			},
+
+			"myruby": {
+				"type": "ruby",
+				"user": "mholland",
+				"group": "mholland",
+				"script": "/home/mholland/demo/ruby/app.ru",
+				"limits": {
+					"timeout": 10,
+					"requests": 100
+				}
+			},
+
+			"mygo": {
+				"type": "external",
+				"executable": "/home/mholland/demo/go/hello",
+				"user": "mholland",
+				"group": "mholland",
+				"working_directory": "/home/mholland/demo/go",
+				"limits": {
+					"timeout": 10,
+					"requests": 100
+				}
+			},
+
+			"mynodejs": {
+				"type": "external",
+				"working_directory": "/home/mholland/demo/nodejs/",
+				"executable": "/home/mholland/demo/nodejs/app.js"
+			},
+			"myjava": {
+                                "type": "java",
+                                "webapp": "/home/mholland/demo/java/"
+                        },
+
+			"myasm": {
+				"type": "external",
+				"executable": "/home/mholland/demo/assembly/hello"
+			}
+		},
+
+		"routes": {
+			"app_routes": [
+				{
+					"match": {
+						"uri": "/php*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/myphp"
+					}
+				},
+				{
+					"match": {
+						"uri": "/python*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/mypython"
+					}
+				},
+				{
+					"match": {
+						"uri": "/perl*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/myperl"
+					}
+				},
+				{
+					"match": {
+						"uri": "/ruby*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/myruby"
+					}
+				},
+				{
+					"match": {
+						"uri": "/go*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/mygo"
+					}
+				},
+				{
+					"match": {
+						"uri": "/nodejs*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/mynodejs"
+					}
+				},
+				{
+					"match": {
+						"uri": "/asm*",
+						"method": "GET"
+					},
+					"action": {
+						"pass": "applications/myasm"
+					}
+				},
+				{
+                                        "match": {
+                                                "uri": "/java/*",
+                                                "method": "GET"
+                                        },
+                                        "action": {
+                                                "pass": "applications/myjava"
+                                        }
+                                },
+				{
+					"action": {
+						"share": "/home/mholland/demo"
+					}
+				}
+			]
+		}
+	}
+}

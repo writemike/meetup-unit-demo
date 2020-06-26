@@ -1,0 +1,204 @@
+{
+	"listeners": {
+		"*:8081": {
+			"pass": "applications/myphp"
+		},
+
+		"*:8088": {
+			"pass": "routes/app_routes"
+		},
+
+		"*:8082": {
+			"pass": "routes/app_routes",
+			"tls": {
+				"certificate": "demo-bundle"
+			}
+		}
+	},
+
+	"routes": {
+		"app_routes": [
+			{
+				"match": {
+					"uri": "/php*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/myphp"
+				}
+			},
+			{
+				"match": {
+					"uri": "/python*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/mypython"
+				}
+			},
+			{
+				"match": {
+					"uri": "/perl*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/myperl"
+				}
+			},
+			{
+				"match": {
+					"uri": "/ruby*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/myruby"
+				}
+			},
+			{
+				"match": {
+					"uri": "/go*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/mygo"
+				}
+			},
+			{
+				"match": {
+					"uri": "/nodejs*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/mynodejs"
+				}
+			},
+			{
+				"match": {
+					"uri": "/java*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/myjava"
+				}
+			},
+			{
+				"match": {
+					"uri": "/asm*",
+					"method": "GET"
+				},
+
+				"action": {
+					"pass": "applications/myasm"
+				}
+			},
+			{
+				"action": {
+					"share": "/home/mholland/demo"
+				}
+			}
+		]
+	},
+
+	"applications": {
+		"myphp": {
+			"type": "php",
+			"processes": {
+				"max": 10,
+				"spare": 1
+			},
+
+			"root": "/home/mholland/demo/php",
+			"user": "mholland",
+			"group": "mholland",
+			"script": "index.php",
+			"limits": {
+				"timeout": 10,
+				"requests": 100
+			}
+		},
+
+		"mypython": {
+			"type": "python",
+			"processes": {
+				"max": 7,
+				"spare": 1
+			},
+
+			"path": "/home/mholland/demo/python",
+			"user": "mholland",
+			"group": "mholland",
+			"module": "wsgi",
+			"limits": {
+				"timeout": 10,
+				"requests": 100
+			}
+		},
+
+		"myperl": {
+			"type": "perl",
+			"processes": {
+				"max": 3,
+				"spare": 1
+			},
+
+			"working_directory": "/home/mholland/demo/perl",
+			"user": "mholland",
+			"group": "mholland",
+			"script": "/home/mholland/demo/perl/app.pl",
+			"limits": {
+				"timeout": 10,
+				"requests": 100
+			}
+		},
+
+		"myruby": {
+			"type": "ruby",
+			"user": "mholland",
+			"group": "mholland",
+			"script": "/home/mholland/demo/ruby/app.ru",
+			"limits": {
+				"timeout": 10,
+				"requests": 100
+			}
+		},
+
+		"mygo": {
+			"type": "external",
+			"executable": "/home/mholland/demo/go/hello",
+			"user": "mholland",
+			"group": "mholland",
+			"working_directory": "/home/mholland/demo/go",
+			"limits": {
+				"timeout": 10,
+				"requests": 100
+			}
+		},
+
+		"mynodejs": {
+			"type": "external",
+			"working_directory": "/home/mholland/demo/nodejs/",
+			"executable": "/home/mholland/demo/nodejs/hello-version.js"
+		},
+
+		"myasm": {
+			"type": "external",
+			"executable": "/home/mholland/demo/assembly/hello",
+			"processes": {
+				"spare": 1,
+				"max": 3
+			}
+		},
+
+		"myjava": {
+			"type": "java",
+			"webapp": "/home/mholland/demo/java/"
+		}
+	}
+}

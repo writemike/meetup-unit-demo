@@ -1,0 +1,87 @@
+[
+	{
+		"match": {
+			"uri": "/php*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/myphp"
+		}
+	},
+	{
+		"match": {
+			"uri": "/python*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/mypython"
+		}
+	},
+	{
+		"match": {
+			"uri": "/perl*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/myperl"
+		}
+	},
+	{
+		"match": {
+			"uri": "/ruby*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/myruby"
+		}
+	},
+	{
+		"match": {
+			"uri": "/go*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/mygo"
+		}
+	},
+	{
+		"match": {
+			"uri": "/nodejs*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/mynodejs"
+		}
+	},
+	{
+                "match": {
+                        "uri": "/java*",
+                        "method": "GET"
+                },
+
+                "action": {
+                        "pass": "applications/myjava"
+                }
+        },
+	{
+		"match": {
+			"uri": "/asm*",
+			"method": "GET"
+		},
+
+		"action": {
+			"pass": "applications/myasm"
+		}
+	},
+	{
+		"action": {
+			"share": "/home/mholland/demo"
+		}
+	}
+]

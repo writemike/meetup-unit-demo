@@ -1,0 +1,15 @@
+{
+	"type": "python",
+        "processes": {
+            "max": 10,
+            "spare": 2
+        },
+        "path": "/home/mholland/demo/python",
+        "user": "mholland",
+        "group": "mholland",
+        "module": "wsgi",
+        "limits": {
+            "timeout": 10,
+            "requests": 100
+        }
+}

@@ -1,0 +1,10 @@
+{
+        "type": "ruby",
+        "user": "mholland",
+        "group": "mholland",
+        "script": "/home/mholland/demo/ruby/app.ru",
+        "limits": {
+            "timeout": 10,
+            "requests": 100
+        }
+}

@@ -1,0 +1,11 @@
+{
+        "type": "external",
+        "executable": "/home/mholland/demo/go/hello",
+	"user": "mholland",
+        "group": "mholland",
+        "working_directory": "/home/mholland/demo/go",
+        "limits": {
+            "timeout": 10,
+            "requests": 100
+	}
+}

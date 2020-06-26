@@ -1,0 +1,45 @@
+Unit Demo Run sheet:
+
+Full disclosure, steps taken before this demo:
+	- Downloaded and compiled the NGINX Unit Source code directly from the GitHub Repo
+	- Downloaded and installed all the programming languages and dependencies from the Unbuntu Repository
+	- Uploaded code examples for all 8 supported programming languages.  
+
+Configure:
+sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"myphp": {"type": "php","root": "/home/mholland/demo/php","script": "index.php"}}'  http://localhost/config/applications
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"pass":"applications/myphp"}' http://localhost/config/listeners/*:8081
+sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/
+curl localhost:8081
+
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d @full-applications.json http://localhost/config/applications
+sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/config/applications
+sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/
+
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"app_routes":[{"match":{"uri":"/php*","method":"GET"},"action":{"pass":"applications/myphp"}}]}'  http://localhost/config/routes/
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"pass": "routes/app_routes"}' http://localhost/config/listeners/*:8088
+curl localhost:8088/php
+
+sudo curl -X PUT --unix-socket /var/run/control.unit.sock -d @full-routes.json http://localhost/config/routes/app_routes
+curl localhost:8089/python/
+curl localhost:8089/perl/
+curl localhost:8089/ruby/
+curl localhost:8089/asm/
+curl localhost:8089/java/
+
+sudo curl -X PUT --unix-socket /var/run/control.unit.sock --data-binary @./certs/certkey.pem http://localhost/certificates/demo-bundle
+sudo curl --unix-socket /var/run/control.unit.sock -X GET http://localhost/certificates
+
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{"pass":"routes/app_routes","tls": {"certificate": "demo-bundle"}}' http://localhost/config/listeners/*:8090
+curl -kv https://localhost:8090/html/
+
+
+Reset:
+sudo curl --unix-socket /var/run/control.unit.sock -X DELETE http://localhost/config/listeners
+sudo curl --unix-socket /var/run/control.unit.sock -X DELETE http://localhost/certificates/demo-bundle
+sudo curl --unix-socket /var/run/control.unit.sock -X DELETE http://localhost/config/routes
+sudo curl --unix-socket /var/run/control.unit.sock -X DELETE http://localhost/config/applications
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{}' http://localhost/config/listeners
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{}' http://localhost/config/routes
+sudo curl --unix-socket /var/run/control.unit.sock -X PUT -d '{}' http://localhost/config/applications
+sudo curl --unix-socket /var/run/control.unit.sock  http://localhost/

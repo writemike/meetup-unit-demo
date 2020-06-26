@@ -1,0 +1,5 @@
+{
+  "type": "external",
+  "working_directory": "/home/mholland/demo/nodejs/",
+  "executable": "/home/mholland/demo/nodejs/app.js"
+}

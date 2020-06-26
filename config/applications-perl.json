@@ -1,0 +1,15 @@
+{
+  "type": "perl",
+  "processes": {
+    "max": 10,
+    "spare": 2
+  },
+  "working_directory": "/home/mholland/demo/perl",
+  "user": "mholland",
+  "group": "mholland",
+  "script": "/home/mholland/demo/perl/app.pl",
+  "limits": {
+    "timeout": 10,
+    "requests": 100
+  }
+}

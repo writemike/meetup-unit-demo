@@ -1,0 +1,17 @@
+{
+    "myphp": {
+        "type": "php",
+        "processes": {
+            "max": 10,
+            "spare": 2
+        },
+        "root": "/home/mholland/demo/php",
+        "user": "mholland",
+        "group": "mholland",
+        "script": "index.php",
+        "limits": {
+            "timeout": 10,
+            "requests": 100
+        }
+    }
+}

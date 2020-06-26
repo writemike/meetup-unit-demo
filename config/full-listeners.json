@@ -1,0 +1,44 @@
+{
+	"*:8081": {
+		"pass": "applications/myphp"
+	},
+
+	"*:8082": {
+		"pass": "applications/mypython"
+	},
+
+	"*:8083": {
+		"pass": "applications/myperl"
+	},
+
+	"*:8084": {
+		"pass": "applications/myruby"
+	},
+
+	"*:8085": {
+		"pass": "applications/mygo"
+	},
+
+	"*:8086": {
+		"pass": "applications/mynodejs"
+	},
+
+	"*:8087": {
+		"pass": "applications/myasm"
+	},
+
+	"*:8088": {
+		"pass": "applications/myjava"
+	},
+
+	"*:8089": {
+		"pass": "routes/app_routes"
+	},
+
+	"*:8090": {
+		"pass": "routes/app_routes",
+		"tls": {
+			"certificate": "demo-bundle"
+		}
+	}
+}
